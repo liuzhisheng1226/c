@@ -23,7 +23,7 @@
 
 分支操作:
    git branch 显示所有分支
-   git branch liuzhisheng  创建名为liuzhisheng的分支
+   git branch liu  创建名为liu的分支
    git checkout liu 切换到名为liu的分支
    git checkout -b liu 创建并切换到名为liu的分支
    git checkout -   切换到上一个分支
