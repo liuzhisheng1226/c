@@ -1,10 +1,16 @@
 基本:
   git status 列出当前目录被修改但未提交的文件.
-  git log    查看提交日志
+显示差别:
+  git diff   工作树和暂存区的区别
+  //执行git commit 前执行git diff HEAD是个好习惯
+  git diff HEAD  与最新提交的差别
+
+显示日志:
+  git log    所有日志
+  git log test.c 显示指定文件/目录日志
 提交文件:
-   git add test.c //将文件加入暂存区
-   git commit     //会打开编辑器输入comment,输入后推出编辑器即可
-   git commit -m "comment"    //提交
-   git push       //更新github仓库
+   git add test.c     将文件加入暂存区
+   git commit -m "comment"     提交
+   git push           更新github仓库
 
 
