@@ -1,0 +1,37 @@
+#!/bin/sh
+#find {file/dir} {key}
+if [ -z $1 ];then
+     echo "usage file/dir"
+     exit -1
+fi
+if [ -z $2 ];then
+     echo "usage key"
+     exit -1
+fi
+
+if [ -d $1 ];then
+  dir=$1
+  for i in `find $dir`
+  do
+    if [ -d $i ];then
+     continue
+    fi
+    OUT=""
+    OUT=`cat -n $i |grep "$2"`
+    if [ -n "$OUT" ] ; then
+      echo $i:
+      echo "$OUT"
+      echo
+    fi
+  done  
+fi
+
+out=""
+out=`cat -n $1 |grep "$2"`
+if [ -n "$out" ]; then
+     echo "$out"
+   exit -1
+fi
+
+
+
