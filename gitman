@@ -3,7 +3,7 @@
   git log    查看提交日志
 提交文件:
    git add test.c //将文件加入暂存区
-   git commit     //提交
+   git commit -m "comment"    //提交
    git push       //更新github仓库
 
 
