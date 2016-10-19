@@ -35,4 +35,16 @@
    git reset --hard aecd54 回溯到hash值为aecd54的状态
 修改提交信息:
    git commit --amend 修改上一条提交信息
+
+建立本地仓库:
+   mkdir git-tutor
+   cd git-tutor
+   git init  //生产.git目录
+推送到远程仓库:
+   //添加远程仓库
+   git remote add origin git@github.com:liuzhisheng1226/gittest.git
+   git push -u origin master   //推送至远程仓库
+   
+
+
      
