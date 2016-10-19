@@ -1,6 +1,5 @@
 基本:
   git status 列出当前目录被修改但未提交的文件.
-  git branch 显示所有分支
 显示差别:
   git diff   工作树和暂存区的区别
   //执行git commit 前执行git diff HEAD是个好习惯
@@ -9,6 +8,7 @@
 显示日志:
   git log    所有日志
   git log test.c 显示指定文件/目录日志
+  git log --graph 图标形式查看日志
 提交文件:
    git add test.c     将文件加入暂存区
    git commit -m "comment"     提交
