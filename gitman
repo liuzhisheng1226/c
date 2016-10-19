@@ -1,5 +1,6 @@
 基本:
   git status 列出当前目录被修改但未提交的文件.
+  git branch 显示所有分支
 显示差别:
   git diff   工作树和暂存区的区别
   //执行git commit 前执行git diff HEAD是个好习惯
@@ -22,3 +23,12 @@
    git checkout liuzhisheng 切换到民为刘只剩的分支
    git checkout -   切换到上一个分支
 
+分支操作:
+   git branch 显示所有分支
+   git branch liuzhisheng  创建名为liuzhisheng的分支
+   git checkout liuzhisheng 切换到民为刘只剩的分支
+   git checkout -   切换到上一个分支
+   git merge --no-ff liu 合并名为liu的分支
+   //git merge 则不会显示 feature，只保留单条分支记录
+   git merge –no-ff 可保存之前的分支历史,能更好的看 merge历史，branch 状态。
+   
