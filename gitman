@@ -6,9 +6,11 @@
   git diff HEAD  与最新提交的差别
 
 显示日志:
-  git log    所有日志
+  git log    查看以当前状态为终点的历史日志
   git log test.c 显示指定文件/目录日志
   git log --graph 图标形式查看日志
+  git reflog   当前仓库的操作日志
+  
 提交文件:
    git add test.c     将文件加入暂存区
    git commit -m "comment"     提交
@@ -27,4 +29,4 @@
    git merge --no-ff liu 合并名为liu的分支
    //git merge 则不会显示 feature，只保留单条分支记录
    git merge –no-ff 可保存之前的分支历史,能更好的看 merge历史，branch 状态。
-   
+      
