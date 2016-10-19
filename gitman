@@ -3,6 +3,7 @@
   git log    查看提交日志
 提交文件:
    git add test.c //将文件加入暂存区
+   git commit     //会打开编辑器输入comment,输入后推出编辑器即可
    git commit -m "comment"    //提交
    git push       //更新github仓库
 
