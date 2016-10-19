@@ -12,5 +12,8 @@
    git add test.c     将文件加入暂存区
    git commit -m "comment"     提交
    git push           更新github仓库
-
+删除文件:
+   git rm test.c
+   git commit
+   git push
 
