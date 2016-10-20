@@ -1,0 +1,62 @@
+top
+top - 21:08:03 up  6:28,  3 users,  load average: 0.39, 0.33, 0.32
+Tasks: 229 total,   2 running, 227 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  5.8 us,  1.5 sy,  0.0 ni, 92.1 id,  0.6 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   3962352 total,  3764696 used,   197656 free,    60776 buffers
+KiB Swap:  7999484 total,      244 used,  7999240 free.  2286128 cached Mem
+PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                     
+7691 liu       20   0 1765028 600368  91448 R  21.6 15.2  13:10.28 firefox 
+
+统计信息区（前五行）
+第一行：任务队列信息
+09:20:44　　当前时间
+up 1:49　 　系统运行时间，格式为时:分
+1  user   　当前登录用户数
+load average: 0.07, 0.02, 0.00 系统负载，即任务队列的平均长度。分别为 1分钟、5分钟、15分钟前到现在的平均值。
+
+第二行：进程信息
+67 total      进程总数
+1  running　　正在运行的进程数
+64 sleeping   睡眠的进程数
+2  stopped　　停止的进程数
+0  zombie     僵尸进程数
+
+第三行：CPU的信息
+0.0%    us 　　 (user mode)用户占用CPU百分比
+0.0%    sy  　　(system mode)系统占用CPU百分比
+0.0%    ni  　　(low priority user mode (nice))低优先级用户占用CPU百分比
+100.0%  id      (idle task)空闲任务占CPU百分比
+0.0%    wa　　  (I/O waiting)等待输入输出的CPU时间百分比
+0.0%    hi  　　(servicing  hardware IRQs)硬件中断占CPU百分比
+0.0%    si  　　(servicing  software IRQs)软件中断占CPU百分比
+
+第四行：物理内存信息
+514280k total 　 物理内存总量
+313348k used 　　使用的物理内存总量
+200932k free 　　空闲内存总量
+20480k  buffers  用作内核缓存的内存量
+
+第五行：交换内存信息
+2008116k  total 　 交换区总量
+0k        used  　 使用的交换区总量
+2008116k  free 　　空闲交换区总量
+217160k   cached   缓冲的交换区总量
+
+进程信息区
+PID      进程id
+USER     进程所有者的用户名
+PR       优先级
+NI       nice值
+VIRT     (virtual)进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+RES      (resident)常驻内存大小,即非交换的内存,单位kb。RES=CODE+DATA
+SHR      (shared memory)共享内存大小,单位kb
+S        进程状态
+           D=不可中断的睡眠状态
+           R=运行
+           S=睡眠
+           T=跟踪/停止
+           Z=僵尸进程
+%CPU    上次更新到现在的CPU时间占用百分比
+%MEM    进程使用的物理内存百分比
+TIME+   进程使用的CPU时间总计，单位1/100秒
+COMMAND 命令名/命令行
