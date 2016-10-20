@@ -49,9 +49,20 @@
    git clone git@github.com:liuzhisheng1226/gittest.git
    git checkout -b branchname origin/branch-a  将branch-a分支获取至本地，且命名为branchname
 跟新分支:
-    1)git fetch，不会自动merge，更安全
+   1)git fetch，不会自动merge，更安全
       git fetch origin master  从远程的origin的master主分支下载最新的版本到origin/master分支上
       git log -p master..origin/master 比较本地的master分支和origin/master分支的差别
       git merge origin/master   进行合并
-    2)git pull，自动merge
+   2)git pull，自动merge
       git pull origin branchname  将本地的branchname分支跟新到最新分支
+推送请求:
+   //在特性分支上作业~~~~
+   fork项目
+   git clone git@github.com:liuzhisheng1226/first-pr.git
+   cd first-pr
+   git branch -b work gh-pages //创建work分支
+   ~~~修改代码,并commit
+   //要从github发送pull request，github端仓库必须有一个包含了修改后代码的分支
+   git push origin work 创建本地work分支的相应远程分支
+   在github上create pull request即可
+    
