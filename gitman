@@ -4,14 +4,12 @@
   git diff   工作树和暂存区的区别
   //执行git commit 前执行git diff HEAD是个好习惯
   git diff HEAD  与最新提交的差别
-
 显示日志:
   git log    查看以当前状态为终点的历史日志
   git log test.c 显示指定文件/目录日志
   git log --graph 图标形式查看日志
   //在回滚的时后，尤其是操作错误的时候，利用此～～
   git reflog   当前仓库的操作日志
-  
 提交文件:
    git add test.c     将文件加入暂存区
    git commit -m "comment"     提交
@@ -20,9 +18,9 @@
    git rm test.c
    git commit
    git push
-
 分支操作:
    git branch 显示所有分支
+   git branch -a 同时显示本地仓库和远程仓库分支
    git branch liu  创建名为liu的分支
    git checkout liu 切换到名为liu的分支
    git checkout -b liu 创建并切换到名为liu的分支
@@ -35,15 +33,25 @@
    git reset --hard aecd54 回溯到hash值为aecd54的状态
 修改提交信息:
    git commit --amend 修改上一条提交信息
-
 建立本地仓库:
    mkdir git-tutor
    cd git-tutor
    git init  //生产.git目录
 推送到远程仓库:
+   //在将本地仓库推送到远程时，可能出现error:src refspec master does not match any
+   //是因为目录中没有文件，空目录是不能提交上去的，必须先至少commit一个文件
    //添加远程仓库,并将远程仓库名称设置为origin
    git remote add origin git@github.com:liuzhisheng1226/gittest.git
-   git push -u origin master   //推送至远程仓库
+   git push -u origin master   //推送至远程仓库master分支
    git push -u origin brancha  //将本地分支brancha推送到远程仓库，并保持名称不变
-
-        
+获取远程仓库:
+   //默认处于master分支下，且自动将origin设置为远程仓库的标识符
+   git clone git@github.com:liuzhisheng1226/gittest.git
+   git checkout -b branchname origin/branch-a  将branch-a分支获取至本地，且命名为branchname
+跟新分支:
+    1)git fetch，不会自动merge，更安全
+      git fetch origin master  从远程的origin的master主分支下载最新的版本到origin/master分支上
+      git log -p master..origin/master 比较本地的master分支和origin/master分支的差别
+      git merge origin/master   进行合并
+    2)git pull，自动merge
+      git pull origin branchname  将本地的branchname分支跟新到最新分支
