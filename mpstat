@@ -1,0 +1,11 @@
+mpstat
+mpstat是Multiprocessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。
+在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。
+mpstat最大的特点是：可以查看多核心cpu中每个计算核心的统计数据；而类似工具vmstat只能查看系统整体cpu情况。
+用法: mpstat [ 选项 ] [ <时间间隔> [ <次数> ] ]
+Options are:
+[ -A ]                               等价于指定-u  -I ALL -P ALL
+[ -I { SUM | CPU | ALL } ]           报告中断统计数据
+[ -u ]                               报告CPU使用率
+[ -P { <cpu> [,...] | ON | ALL } ]   选择处理器编号
+
