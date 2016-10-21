@@ -7,5 +7,12 @@ Options are:
 [ -A ]                               等价于指定-u  -I ALL -P ALL
 [ -I { SUM | CPU | ALL } ]           报告中断统计数据
 [ -u ]                               报告CPU使用率
-[ -P { <cpu> [,...] | ON | ALL } ]   选择处理器编号
+[ -P { <cpu> [,...] | ON | ALL } ]   选择处理器编号,此处是指逻辑号，即核心
+
+//本人笔记本逻辑处理器共4
+liu@liu:~$ mpstat -P 3 1 1
+Linux 3.13.0-86-generic (liu) 	2016年10月21日 	_x86_64_	(4 CPU)
+09时17分17秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+09时17分18秒    3    1.01    0.00    1.01    0.00    0.00    0.00    0.00    0.00    0.00   97.98
+平均时间:    3    1.01    0.00    1.01    0.00    0.00    0.00    0.00    0.00    0.00   97.98
 
