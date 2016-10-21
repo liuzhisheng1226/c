@@ -1,0 +1,62 @@
+numastat && numactl
+UMA,非统一内存访问(Non-uniform Memory Access),介于SMP(对称多处理)和MPP(大规模并行处理)之间，各个节点自有内存(甚至IO子系统),访问其它节点的内存则通过高速网络通道。NUMA信息主要通过BIOS中的ACPI(高级配置和编程接口)进行配置,Linux对NUMA系统的物理内存分布信息从系统firmware的ACPi表中获得，最重要的是SRAT(System Resource Affinity Table)和SLIT(System locality Information Table)表。SRAT表包含CPU信息、内存相关性信息,SLIT表则记录了各个节点之间的距离，在系统中由数组node_distance[]记录。这样系统可以就近分配内存，减少延迟。
+Linux中用一个struct pg_data_t表示一个numa节点，Linux内核支持numa调度,并实现CPU的负载均衡。
+查看是否支持:dmesg | grep NUMA
+要查看具体的numa信息用numastat
+numastat
+[liuzhisheng@snode27 ~]$ dmesg |grep NUMA
+NUMA: Using 31 for the hash shift.
+[liuzhisheng@snode27 ~]$ numastat
+                           node0           node1
+numa_hit             30944477498     30109920966
+numa_miss              856927261          360592
+numa_foreign              360592       856927261
+interleave_hit             14085           14106
+local_node           30944344733     30109902680
+other_node             857060026          378878
+
+numa_hit        是打算在该节点上分配内存，最后从这个节点分配的次数;
+num_miss        是打算在该节点分配内存，最后却从其他节点分配的次数;
+num_foregin     是打算在其他节点分配内存，最后却从这个节点分配的次数;
+interleave_hit  是采用interleave策略最后从该节点分配的次数;
+local_node      该节点上的进程在该节点上分配的次数
+other_node      是其他节点进程在该节点上分配的次数
+lscpu可以看到两个node的cpu归属:
+[liuzhisheng@snode27 ~]$ lscpu
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit 
+Byte Order:            Little Endian 
+CPU(s):                32               逻辑cpu数
+On-line CPU(s) list:   0-31 
+Thread(s) per core:    2                每个核的线程数
+Core(s) per socket:    8                每个物理cpu核数
+CPU socket(s):         2                cpu插槽数
+NUMA node(s):          2
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 45
+Stepping:              7
+CPU MHz:               2001.000         cpu主频
+BogoMIPS:              3999.44
+Virtualization:        VT-x             cpu支持的虚拟化技术VT-x
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              20480K
+NUMA node0 CPU(s):     0-7,16-23
+NUMA node1 CPU(s):     8-15,24-31
+
+numactl
+用法
+   [--physcpubind= | -C <cpus>]  绑定的是的逻辑cpu号
+   [--cpunodebind= | -N <nodes>] 绑定的是物理cpu
+   [--membind= | -m <nodes>]     绑定物理
+       numactl [--show | -s]
+       numactl [--hardware | -H]
+       numactl [--length | -l <length>] [--offset | -o <offset>] [--shmmode | -M <shmmode>]
+               [--strict | -t]
+               [--shmid | -I <id>] --shm | -S <shmkeyfile>
+               [--shmid | -I <id>] --file | -f <tmpfsfile>
+               [--huge | -u] [--touch | -T] 
+               memory policy | --dump | -d | --dump-nodes | -D
+
