@@ -1,4 +1,11 @@
 numastat && numactl
+在NUMA架构下，系统根据CPU的物理颗数，将内存分成对应的Node。例如，两颗物理CPU，16GB内存的硬件：系统则将内存分成两个8GB，分别分配给两颗CPU：
+my111.cm3:/root>#numactl --hardware
+available: 2 nodes (0-1)
+node 0 size: 8065 MB
+node 1 size: 8080 MB
+每一个Node，系统又将其分为多个Zone，64位x86架构下（参考:8.1.5），分为两个ZONE_DMA（低16MB，）、ZONE_NORMAL（其余内存）。所以NUMA架构下的内存分配，也就是在各个zone分配内存。
+
 UMA,非统一内存访问(Non-uniform Memory Access),介于SMP(对称多处理)和MPP(大规模并行处理)之间，各个节点自有内存(甚至IO子系统),访问其它节点的内存则通过高速网络通道。NUMA信息主要通过BIOS中的ACPI(高级配置和编程接口)进行配置,Linux对NUMA系统的物理内存分布信息从系统firmware的ACPi表中获得，最重要的是SRAT(System Resource Affinity Table)和SLIT(System locality Information Table)表。SRAT表包含CPU信息、内存相关性信息,SLIT表则记录了各个节点之间的距离，在系统中由数组node_distance[]记录。这样系统可以就近分配内存，减少延迟。
 Linux中用一个struct pg_data_t表示一个numa节点，Linux内核支持numa调度,并实现CPU的负载均衡。
 查看是否支持:dmesg | grep NUMA
@@ -47,10 +54,11 @@ NUMA node0 CPU(s):     0-7,16-23
 NUMA node1 CPU(s):     8-15,24-31
 
 numactl
+
 用法
    [--physcpubind= | -C <cpus>]  绑定的是的逻辑cpu号
    [--cpunodebind= | -N <nodes>] 绑定的是物理cpu
-   [--membind= | -m <nodes>]     绑定物理
+   [--membind= | -m <nodes>]     绑定物理内存
        numactl [--show | -s]
        numactl [--hardware | -H]
        numactl [--length | -l <length>] [--offset | -o <offset>] [--shmmode | -M <shmmode>]
@@ -59,4 +67,31 @@ numactl
                [--shmid | -I <id>] --file | -f <tmpfsfile>
                [--huge | -u] [--touch | -T] 
                memory policy | --dump | -d | --dump-nodes | -D
+例:
+   numactl --cpubind=0 --membind=0,1 program
+   [liuzhisheng@snode27 ~]$ numactl --hardware
+   available: 2 nodes (0-1)
+   node 0 cpus: 0 1 2 3 4 5 6 7 16 17 18 19 20 21 22 23
+   node 0 size: 16355 MB
+   node 0 free: 11140 MB
+   node 1 cpus: 8 9 10 11 12 13 14 15 24 25 26 27 28 29 30 31
+   node 1 size: 16384 MB
+   node 1 free: 12739 MB
+   node distances:
+   node   0   1 
+    0:  10  21 
+    1:  21  10 
+   
+
+
+
+
+
+
+
+
+
+
+
+
 
